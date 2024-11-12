@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb+srv://untitled:oqdOLCDAfdbm4D09@cluster0.sxosl60.mongodb.net/ecosync?retryWrites=true&w=majority")
+app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb+srv://vatsalbhuva11:mLAQwkxn5J9vrZIu@cluster0.0st3c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "123123")
 
 mongo = PyMongo(app)
@@ -19,6 +19,10 @@ def check_if_token_in_blacklist(jwt_header, jwt_payload):
     jti = jwt_payload['jti']
     token = mongo.db.blacklist.find_one({"jti": jti})
     return token is not None
+
+@app.route('/', methods=['GET'])
+def test():
+    return jsonify({'message': 'Server is up and running.'}), 200
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -176,4 +180,4 @@ def get_threads():
 
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.run(host='192.168.137.148', port=8080, debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True)
