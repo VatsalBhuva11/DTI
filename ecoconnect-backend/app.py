@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb+srv://vatsalbhuva11:mLAQwkxn5J9vrZIu@cluster0.0st3c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb+srv://vatsalbhuva11:mLAQwkxn5J9vrZIu@cluster0.0st3c.mongodb.net/dti?retryWrites=true&w=majority&appName=Cluster0")
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "123123")
 
 mongo = PyMongo(app)
@@ -27,6 +27,8 @@ def test():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
+    print("API DATA:")
+    print(data)
     username = data.get('username', '').strip()
     email = data.get('email', '').strip()
     password = data.get('password', '').strip()
